@@ -1,10 +1,10 @@
 --------------------------------------------------------------------------------
 -- Details:
---		Type: Random-Access Memory (RAM)
---		Data width: 8
---		Address width: 16
---		Output enable (OE) active high
---		Uninitialized bits set to 0
+--Type: Random-Access Memory (RAM)
+--Data width: 8
+--Address width: 16
+--Output enable (OE) active high
+--Uninitialized bits set to 0
 --------------------------------------------------------------------------------
 
 library IEEE;
@@ -29,23 +29,15 @@ entity image is
 		w_ROW 		: in STD_LOGIC_VECTOR(7 downto 0);
 		w_COL 		: in STD_LOGIC_VECTOR(7 downto 0);
 		DATA_IN		: in STD_LOGIC_VECTOR(7 downto 0);
-		--r_CLK		: in STD_LOGIC;
 		r_ROW 		: in STD_LOGIC_VECTOR(9 downto 0);
 		r_COL 		: in STD_LOGIC_VECTOR(9 downto 0);
 		DATA_OUT 	: out STD_LOGIC_VECTOR(7 downto 0)
 		);
 end entity;
--- zakomentowana sekcja powinna byc w architekturze 
--- type RAM_IMAGE is array (0 to 119, 0 to 159) of STD_LOGIC_VECTOR(7 downto 0);		
--- attribute ramstyle : string;
--- attribute ramstyle of RAM_IMAGE : signal is "block";	
-
-
---signal IMAGE : 
 
 architecture image_arch of image is
 	
-	--type RAM is array (0 to 119, 0 to 159) of STD_LOGIC_VECTOR(7 downto 0);
+
 	type RAM is array (0 to 19199) of STD_LOGIC_VECTOR(7 downto 0);
 	signal RAM_IMAGE : RAM := (X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",
 X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",X"FF",
@@ -661,7 +653,6 @@ begin
 		if CLK'event and CLK = '1' then	
 			if r_ROW < 120 and r_COL < 160 then	
 				address := (conv_integer(r_ROW(6 downto 0)) * 160) + conv_integer(r_COL(7 downto 0));
-				-- address := (conv_integer(r_COL(7 downto 0)) * 120) + conv_integer(r_ROW(6 downto 0));
 				if w_EN = '0' then 		
 					DATA_OUT <= RAM_IMAGE(address);
 				end if; -- write enable 				 
@@ -676,7 +667,6 @@ begin
 		variable address : INTEGER range 0 to 19199;
 	begin		  
 		address := (conv_integer(w_ROW(6 downto 0)) * 160) + conv_integer(w_COL(7 downto 0));
-		-- address := (conv_integer(w_COL(7 downto 0)) * 120) + conv_integer(w_ROW(6 downto 0));
 		if CLK'event and CLK = '1' then
 			--if r_ROW < 120 and r_COL < 160 then
 				if w_EN = '1' then
