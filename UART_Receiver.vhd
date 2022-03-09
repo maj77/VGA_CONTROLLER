@@ -24,7 +24,7 @@ entity UART_RX is
 			DATA_LEN : INTEGER := 8;
 			CLKS_PER_BIT : INTEGER := 2604	   -- powinno byc 2604
 		); 
-																  											   
+
 	port (
 		CLK         	: in  STD_LOGIC;  							-- input clock
 		RX_BIT      	: in  STD_LOGIC;  							-- serial data in	 
@@ -34,7 +34,6 @@ entity UART_RX is
 		Q		: out STD_LOGIC_VECTOR(DATA_LEN-1 downto 0) -- parallel data out
 		);
 end UART_RX;
-
 
 architecture UART_RX of UART_RX is	
 	
