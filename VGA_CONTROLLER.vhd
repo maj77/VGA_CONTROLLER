@@ -37,14 +37,14 @@ entity VGA_CONTROLLER is
 	
 	port(
 		------- PORT DECLARATIONS --------
-		CLK		: in STD_LOGIC;											-- increments over every pixel
-		RESET		: in STD_LOGIC;	 										-- asynchronous reset active low  
+		CLK		: in STD_LOGIC;									-- increments over every pixel
+		RESET		: in STD_LOGIC;	 								-- asynchronous reset active low  
 		CE		: in STD_LOGIC;
-		H_SYNC		: out STD_LOGIC;										-- horizontal sync signal
-		V_SYNC		: out STD_LOGIC;										-- vertical sync signal
-		DISP_EN		: out STD_LOGIC;										-- display enable
-		COL		: out STD_LOGIC_VECTOR(9 downto 0) := (others => '0');						-- horizontal pixel coordinate
-		ROW		: out STD_LOGIC_VECTOR(9 downto 0) := (others => '0')						-- vertical pixel coordinate
+		H_SYNC		: out STD_LOGIC;								-- horizontal sync signal
+		V_SYNC		: out STD_LOGIC;								-- vertical sync signal
+		DISP_EN		: out STD_LOGIC;								-- display enable
+		COL		: out STD_LOGIC_VECTOR(9 downto 0) := (others => '0');				-- horizontal pixel coordinate
+		ROW		: out STD_LOGIC_VECTOR(9 downto 0) := (others => '0')				-- vertical pixel coordinate
 		);
 end VGA_CONTROLLER;
 
