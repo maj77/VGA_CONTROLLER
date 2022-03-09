@@ -6,7 +6,6 @@
 --Output enable (OE) active high
 --Uninitialized bits set to 0
 --------------------------------------------------------------------------------
-
 library IEEE;
 use IEEE.std_logic_1164.all;   
 
@@ -14,7 +13,6 @@ package mypack is
 	type myarray_t is array(INTEGER range<>) of STD_LOGIC_VECTOR;
 	type mem_t is array(INTEGER range<>) of myarray_t;
 end package;
-
 
 library IEEE;
 use IEEE.std_logic_1164.all;   
