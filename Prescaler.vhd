@@ -32,7 +32,7 @@ architecture Prescaler of Prescaler is
 
 signal DIVIDER: std_logic_vector(2 downto 0) := "000";	-- internal divider register 
 constant divide_factor: integer := 4;	-- divide factor user constant
-												-- remember to adjust lenght of DIVIDER register when divide_factor is being changed
+					-- remember to adjust lenght of DIVIDER register when divide_factor is being changed
 begin 
 	process (CLK, RESET)
 	begin
