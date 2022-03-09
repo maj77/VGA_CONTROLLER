@@ -3,7 +3,7 @@
 -- Title       : Image generator for VGA
 -- Design      : VGA
 -- Author      : Marcin Maj
--- Company     : AGH Kraków
+-- Company     : AGH KrakÃ³w
 --
 -------------------------------------------------------------------------------
 --
@@ -21,8 +21,8 @@ use ieee.std_logic_unsigned.all;
 entity IMAGE_GENERATOR is
 	port( 
 		DISP_EN		: in STD_LOGIC;
-		IMG			: in STD_LOGIC_VECTOR(7 downto 0);	-- 8bit color value from memory
-		RED			: out STD_LOGIC_VECTOR(2 downto 0);
+		IMG		: in STD_LOGIC_VECTOR(7 downto 0);	-- 8bit color value from memory
+		RED		: out STD_LOGIC_VECTOR(2 downto 0);
 		GREEN		: out STD_LOGIC_VECTOR(2 downto 0);
 		BLUE		: out STD_LOGIC_VECTOR(1 downto 0)	
 		);
