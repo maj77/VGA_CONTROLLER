@@ -21,14 +21,14 @@ entity VGA_CONTROLLER is
 	
 	generic(
 		------- HORIZONTAL PUlSE WIDTH VALUES --------
-		H_PIXELS			: INTEGER := 640;	-- visible area
+		H_PIXELS		: INTEGER := 640;		-- visible area
 		H_FRONT_PORCH		: INTEGER := 16;
 		H_SYNC_PULSE		: INTEGER := 96;	
 		H_BACK_PORCH		: INTEGER := 48;	 
 		H_SYNC_POLARITY		: STD_LOGIC := '0';		-- polarity of horizontal sync pulse
 		
 		------- VERTICAL PUlSE WIDTH VALUES --------
-		V_PIXELS			: INTEGER := 480;	-- visible area
+		V_PIXELS		: INTEGER := 480;		-- visible area
 		V_FRONT_PORCH		: INTEGER := 10;
 		V_SYNC_PULSE		: INTEGER := 2;
 		V_BACK_PORCH		: INTEGER := 33;
@@ -37,14 +37,14 @@ entity VGA_CONTROLLER is
 	
 	port(
 		------- PORT DECLARATIONS --------
-		CLK			: in STD_LOGIC;											-- increments over every pixel
-		RESET		: in STD_LOGIC;	 											-- asynchronous reset active low  
-		CE			: in STD_LOGIC;
-		H_SYNC		: out STD_LOGIC;											-- horizontal sync signal
-		V_SYNC		: out STD_LOGIC;											-- vertical sync signal
-		DISP_EN		: out STD_LOGIC;											-- display enable
-		COL			: out STD_LOGIC_VECTOR(9 downto 0) := (others => '0');		-- horizontal pixel coordinate
-		ROW			: out STD_LOGIC_VECTOR(9 downto 0) := (others => '0')		-- vertical pixel coordinate
+		CLK		: in STD_LOGIC;											-- increments over every pixel
+		RESET		: in STD_LOGIC;	 										-- asynchronous reset active low  
+		CE		: in STD_LOGIC;
+		H_SYNC		: out STD_LOGIC;										-- horizontal sync signal
+		V_SYNC		: out STD_LOGIC;										-- vertical sync signal
+		DISP_EN		: out STD_LOGIC;										-- display enable
+		COL		: out STD_LOGIC_VECTOR(9 downto 0) := (others => '0');						-- horizontal pixel coordinate
+		ROW		: out STD_LOGIC_VECTOR(9 downto 0) := (others => '0')						-- vertical pixel coordinate
 		);
 end VGA_CONTROLLER;
 
