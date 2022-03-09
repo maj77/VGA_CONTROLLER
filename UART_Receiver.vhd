@@ -26,12 +26,12 @@ entity UART_RX is
 		); 
 																  											   
 	port (
-		CLK         : in  STD_LOGIC;  							-- input clock
-		RX_BIT      : in  STD_LOGIC;  							-- serial data in	 
-		w_COL		: out STD_LOGIC_VECTOR(7 downto 0);
+		CLK         	: in  STD_LOGIC;  							-- input clock
+		RX_BIT      	: in  STD_LOGIC;  							-- serial data in	 
+		w_COL	  	: out STD_LOGIC_VECTOR(7 downto 0);
 		w_ROW 		: out STD_LOGIC_VECTOR(7 downto 0);	 
 		w_EN		: out STD_LOGIC;
-		Q		    : out STD_LOGIC_VECTOR(DATA_LEN-1 downto 0) -- parallel data out
+		Q		: out STD_LOGIC_VECTOR(DATA_LEN-1 downto 0) -- parallel data out
 		);
 end UART_RX;
 
@@ -40,24 +40,23 @@ architecture UART_RX of UART_RX is
 	
 	--- INTERNAL SIGNALS ---	
 	type RX_STATE is(IDLE,
-					START_BIT,
-					DATA_BITS,
-					STOP_BIT,
-					SEND,
-					NEXT_ADDR);
+			START_BIT,
+			DATA_BITS,
+			STOP_BIT,
+			SEND,
+			NEXT_ADDR);
 				
 	
 	-- signal representing states	--
-	signal 	 STATE 		 : RX_STATE := IDLE; 	   
+	signal 	 STATE 	: RX_STATE := IDLE; 	   
 	
 	-- sampling signals --
-	signal 	 CLK_COUNTER : INTEGER := 0;	
+	signal 	 CLK_COUNTER  : INTEGER := 0;	
 	constant CLK_HALF_BIT : INTEGER := CLKS_PER_BIT / 2;	-- after 2604 clock ticks hit in half of data bit (for 38400 baud rate)
 	
 	-- serial to paraller signals --
 	signal BIT_INDEX : INTEGER range 0 to DATA_LEN-1 := 0; 
-	signal RX_DATA	: STD_LOGIC_VECTOR(DATA_LEN-1 downto 0) := (others => '0'); 	   
-	--signal RX_DATA	: STD_LOGIC_VECTOR(0 to DATA_LEN-1) := (others => '0'); 
+	signal RX_DATA	 : STD_LOGIC_VECTOR(DATA_LEN-1 downto 0) := (others => '0'); 	   
 	
 	-- memory address signals --
 	signal ROW : STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
@@ -65,8 +64,6 @@ architecture UART_RX of UART_RX is
 begin
 	
 	process(CLK) 	
-	--variable ROW : INTEGER := 0;
-	--variable COL : INTEGER := 0;
 	begin
 	if CLK'event and CLK = '1' then
 		case STATE is
@@ -121,10 +118,6 @@ begin
 			
 			when SEND =>	 
 				w_EN <= '1';	   
-				
-				--w_COL <= std_logic_vector(to_unsigned(COL,w_COL'length));
-				--w_ROW <= std_logic_vector(to_unsigned(ROW, w_ROW'length));	
-				--Q <= RX_DATA;
 				if CLK_COUNTER < CLK_HALF_BIT then  -- wait till half of start bit
 					CLK_COUNTER <= CLK_COUNTER + 1;
 				else	
@@ -137,17 +130,12 @@ begin
 			if ROW < 120 then
 				if COL < 160 then
 					COL <= COL + 1; 
-					--COL := COL + 1;
 				else 
 					COL <= (others => '0');
 					ROW <= ROW + 1;
-					--COL := 0;
-					--ROW := ROW + 1;
 				end if;
 			else
 				ROW <= (others => '0');
-				--COL <= (others => '0');
-				--ROW := 0;
 			end if;	 
 			STATE <= IDLE;			
 		end case;		
